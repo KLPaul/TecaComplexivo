@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head  th:replace="~{layout/layout :: head}"></head>
+
+<body>
+
+	<header th:replace="~{layout/layout :: header}"></header>
+	
+	
+	<div class="card">
+		<div class="card-header" th:text="${titulo}"></div>
+		
+		 <!-- Formulario de búsqueda -->
+        <form class="d-flex" th:action="@{/buscar}" method="get" role="search">
+            <input class="form-control me-2" type="search" name="nombreEstudiante" placeholder="Buscar Estudiantes" aria-label="Buscar" />
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+        </form>
+					
+		
+		<div class="card-body">
+		
+	
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Id Estudiante</th>
+						<th>Cedula </th>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th>Materia</th>
+						<th></th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="estudiante: ${estudiantes}">
+						<td th:text="${estudiante.idEstudiante}"></td>
+						<td th:text="${estudiante.cedula}"></td>
+						<td th:text="${estudiante.nombreEstudiante}"></td>
+						<td th:text="${estudiante.apellido}"></td>
+						<td th:text="${estudiante.materia.nombreMateria}"></td>
+						<td><a class="btn btn-primary btn-xs" th:href="@{/formEstudiante/} + ${estudiante.idEstudiante}" th:text="'editar'"></a></td>
+						<td><a class="btn btn-success" th:href="@{/reporte/} + ${estudiante.idEstudiante}" th:text="'reporte'"></a></td>
+						<td><a class="btn btn-danger btn-xs" th:href="@{/eliminarEstudiante/} + ${estudiante.idEstudiante}" th:text="'eliminar'"></a></td>
+						
+					</tr>
+					
+				</tbody>
+			</table>
+			
+		</div>
+	</div>
+	
+	
+	
+		
+	
+	
+	
+	
+	
+	
+	
+	<footer th:replace="~{layout/layout :: footer}"></footer>
+	
+</body>
+
+</html>
